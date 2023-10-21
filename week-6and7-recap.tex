@@ -108,7 +108,7 @@ the moment generating function is defined as:
 
 
 \[
-	M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} f_X(x) dx
+	M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} e^{tx} f_X(x) dx
 \]
 
 \section*{Quantiles and Percentiles}
@@ -132,7 +132,7 @@ the moment generating function is defined as:
 	      input scores, not in percentages.
 \end{itemize}
 
-\subsection{Percentiles}
+\subsection*{Percentiles}
 
 \begin{itemize}
 	\item In essence, a \textbf{percentiles} are $100$-quantiles.
@@ -168,7 +168,7 @@ the moment generating function is defined as:
 	\item This is the same as a distribution's \textbf{inverse cumulative
 		      distribution function}, which intuitively make sense because
 	      it does the opposite of the CDF.
-	\item See the ``R Distributions Section'' from the Week 3 to 5 recap.
+	\item See the ``R Distribution Functions'' from the Week 3 to 5 recap.
 \end{itemize}
 
 \section*{Common Continuous Distributions}
@@ -289,7 +289,7 @@ Also known as the ``80-20 rule''.
 	\item \textit{Associated R functions}: \verb|dpareto ppareto, qpareto, rpareto|
 \end{itemize}
 
-\section{Histograms and Probability Plots}
+\section*{Histograms and Probability Plots}
 
 There are different techniques to visualize data and understand which distribution might best fit the data. This section covers two of them.
 
@@ -298,8 +298,9 @@ There are different techniques to visualize data and understand which distributi
 	\item For large sample sizes, typically \textbf{histograms} are used to
 	      determine which distribution fits the data
 	      \begin{itemize}
-		      \item A \textbf{histogram} is a commonly used graph to show \emph{frequency distributions} (i.e.
-		            how often each value in a dataset shows up in that dataset)
+              \item A \textbf{histogram} is a commonly used graph to show
+                  \emph{frequency distributions} (i.e. how often each value in
+                  a dataset shows up in that dataset)
 		      \item Example histogram:
 		            \begin{figure}[H]
 			            \begin{center}

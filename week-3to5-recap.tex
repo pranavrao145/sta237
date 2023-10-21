@@ -94,8 +94,8 @@ For each distribution, there are two main functions that can be used to describe
 		            \[
 			            E[X] = \mu = \displaystyle\sum_{i} a_i P(X=a_i) = \displaystyle\sum_{i} a_i p(a_i)
 		            \]
-              \item For a \textit{continuous} random variable $X$, given that
-                  the PDF of $X$ is $f(x)$ for some value $x$:
+		      \item For a \textit{continuous} random variable $X$, given that
+		            the PDF of $X$ is $f(x)$ for some value $x$:
 		            \[
 			            E[X] = \mu = \int_{-\infty}^{\infty}x f(x) dx
 		            \]
@@ -158,11 +158,11 @@ For each distribution, there are two main functions that can be used to describe
 	      \begin{itemize}
 		      \item For a \textit{discrete random variable} $X$ with PMF
 		            $p_X$, the moment-generating function is defined as: \[
-			            M_X(t) = E(e^{tX}) = \displaystyle\sum_{k} e^{kX}p_X(k)
+			            M_X(t) = E(e^{tX}) = \displaystyle\sum_{k} e^{tk}p_X(k)
 		            \]
 		      \item For a \textit{continuous random variable} $X$ with PDF
 		            $f_X$, the moment-generating function is defined as: \[
-			            M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} f_X(x) dx
+			            M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} e^{tx} f_X(x) dx
 		            \]
 	      \end{itemize}
 	\item We can get the $n$'th moment from a moment-generating formula $M_X(t)$ by taking $n$ derivatives of the MGF and then evaluating at $0$. That is to say:
@@ -246,7 +246,7 @@ this appears to be far more common.
 	      $r$ successes appear in the first $x$ independent Bernoulli trials
 	\item \textit{Example}: ``what is the probability that, if I continuously
 	      flip a fair coin, I will get three heads within the first 5 trials'' (where
-	      $r = 3$, $x = 5$, $p = \frac{1}{2}$)
+	      $r = 3$, $k = 5$, $p = \frac{1}{2}$)
 	\item \textit{Notation}: $NB(r,p)$, where $r$ is the
 	      desired number of successes and $p$ is the
 	      probability of the success event occurring
@@ -275,17 +275,17 @@ this appears to be far more common.
 	      and 1 nurse are picked?'' (where $N = 25$, $n = 5$, $b = 6$, and $k =
 		      4$)
 	\item \textit{Notation}: (I could not find a satisfactory answer for this,
-	      so I'm guessing) $H(N, k, n)$, where $N$ is the total size of both
-	      groups, $k$ is the size of the success group, and $n$ is the sample
+	      so I'm guessing) $H(N, b, n)$, where $N$ is the total size of both
+	      groups, $b$ is the size of the success group, and $n$ is the sample
 	      size
-	\item \textit{PMF}: $P(x = k) = \frac{{n\choose k} \cdot {N - b \choose n -
+	\item \textit{PMF}: $P(X = k) = \frac{{b\choose k} \cdot {N - b \choose n -
 				      k}}{{N \choose n}}$, where $N$ is the total size of both groups, $b$ is
 	      the size of the ``success'' group, and $k$ is the desired number of
 	      elements to be drawn from the success group
 	\item \textit{Mean}: $n \cdot \frac{b}{N}$, where $n$ is
 	      the sample size, $b$ is the size of the success
 	      group, and $N$ is the size of both groups combined
-	\item \textit{Variance}: $n \cdot \frac{b}{n} \cdot
+	\item \textit{Variance}: $n \cdot \frac{b}{N} \cdot
 		      \frac{N - b}{N} \cdot \frac{N - n}{N - 1}$, where
 	      $N$ is the total sample size, $b$ is the size of the
 	      ``success'' group, and $N$ is the size of both
