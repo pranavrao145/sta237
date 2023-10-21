@@ -94,7 +94,8 @@ For each distribution, there are two main functions that can be used to describe
 		            \[
 			            E[X] = \mu = \displaystyle\sum_{i} a_i P(X=a_i) = \displaystyle\sum_{i} a_i p(a_i)
 		            \]
-		      \item For a \textit{continuous} random variable $X$, given that the PDF of $X$ is $p(a)$ for some value $a$:
+              \item For a \textit{continuous} random variable $X$, given that
+                  the PDF of $X$ is $f(x)$ for some value $x$:
 		            \[
 			            E[X] = \mu = \int_{-\infty}^{\infty}x f(x) dx
 		            \]
@@ -170,7 +171,7 @@ For each distribution, there are two main functions that can be used to describe
 	      \]
 \end{itemize}
 
-\section{Common Distributions}
+\section{Common Discrete Distributions}
 
 In statistics, there are common distributions that can be used to model certain
 types of events. Memorizing these distributions can make calculating
@@ -182,7 +183,9 @@ distribution functions later this document). NOTE: all of these random
 variables are discrete because we have not explicitly covered continuous
 distributions yet.
 
-\subsection{Uniform Distribution}
+\subsection{Discrete Uniform Distribution}
+A note: this distribution should be used sparingly; the continuous version of
+this appears to be far more common.
 \begin{itemize}
 	\item \textit{Use case}: where all of the $n$ discrete outcomes are equally likely to occur
 	\item \textit{Example}: rolling a fair six-sided die
@@ -190,7 +193,7 @@ distributions yet.
 	\item \textit{PMF}: $1 / n$, where $n$ is the number of possible outcomes
 	\item \textit{Mean}: $\frac{a + b}{2}$, where $a$ is the first discrete value and $b$ is the last
 	\item \textit{Variance}: $\frac{n^2 - 1}{12}$, where $n$ is the number of outcomes
-	\item \textit{Associated R functions}: \verb|dunif, punif, qunif, runif|
+	\item \textit{Associated R functions}: None in the standard library.
 \end{itemize}
 \subsection{Bernoulli Distribution}
 \begin{itemize}
@@ -313,10 +316,8 @@ distributions yet.
 
 \section{R Distribution Functions}
 
-
-
 \begin{itemize}
-	\item  R follows a similar format for all of its functions that have to do with distributions.
+	\item R follows a similar format for all of its functions that have to do with distributions.
 	\item Each distribution function has four variations, which start with four prefixes: \verb|d, p, q, r|. Here is what each one does:
 	      \begin{itemize}
 		      \item \verb|d| variation: returns the value of the \textbf{distribution's PMF} at the given parameters.
