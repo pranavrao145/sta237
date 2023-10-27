@@ -250,11 +250,11 @@ this appears to be far more common.
 	\item \textit{Notation}: $NB(r,p)$, where $r$ is the
 	      desired number of successes and $p$ is the
 	      probability of the success event occurring
-	\item \textit{PMF}: $P(x = k) = {k-1\choose r-1} p^{r-1}(1-p)^{(k-1) - (r-1)}$, where $p$ is the
+	\item \textit{PMF}: $P(x = k) = {k - 1}\choose{r - 1}p^r (1-p)^{k-r}$, where $p$ is the
 	      probability of the success outcome, $r$ is the desired number of
 	      successes, and $k$ is the number of trials within which you want to
 	      achieve $r$ successes
-	\item \textit{Mean}: $\frac{r(1-p)}{p}$, where $p$ is the probability of
+	\item \textit{Mean}: $\frac{r}{p}$, where $p$ is the probability of
 	      the success outcome, $r$ is the desired number of successes
 	\item \textit{Variance}: $\frac{r(1-p)}{p^2}$, where $p$ is the probability of
 	      the success outcome, $r$ is the desired number of successes
