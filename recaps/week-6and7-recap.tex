@@ -15,6 +15,8 @@
 	\renewcommand{\headrulewidth}{0.4pt}
 }
 
+\newtheorem*{theorem}{Theorem}
+
 \graphicspath{ {./figures/week-6and7-recap} }
 
 \lhead{\fancyplain{Pranav Rao}{Pranav Rao}}
@@ -267,28 +269,33 @@ will update this at one point.
 
 \begin{itemize}
 	\item \textit{Use case}: where you want to understand the probability of a
-	      specific event occurring at a particular threshold or level in a system.
+	      specific event occurring at a particular threshold or level in a system. The
+	      distribution is right-skewed and has a heavy long tail. Example: it is
+	      useful for modelling catastrophic events where a claim might have a
+	      very large value.
 	\item \textit{Examples}: want to find the probability that a person has
 	      a \$2000 income, given that people's incomes follow a Pareto distribution
-	      with a shape parameter $\alpha = 3$ (where $k = 2000$). \emph{(Note:
-		      you pretty much need to be given that a situtation follows a Pareto
-		      distribution with a given shape parameter to actually use the
-		      distribution, it's not very intuitive.)}
-	\item \textit{Notation}: $Par(\alpha)$, where $\alpha$ is shape
+	      with a rate parameter $\alpha = 3$ and a location parameter $\beta = 1$
+	      (where $k = 2000$). \emph{(Note: you pretty much need to be given
+		      that a situtation follows a Pareto distribution with a given shape
+		      parameter to actually use the distribution, it's not very intuitive.)}
+	\item \textit{Notation}: $Par(\alpha, \beta)$, where $\alpha$ is shape/rate
 	      parameter (slope of the distribution/how quickly it drops off; low
 	      $\alpha$ implies low drop off implies that more extreme outcomes are
-	      more likely)
-	\item \textit{PDF}: $P(X = k) = \frac{\alpha}{k^{\alpha + 1}}$ for $k
-		      \geq 1$, where $\alpha$ is the shape parameter
+	      more likely). $\beta$ is the location parameter. Note the Pareto distribution
+	      in the textbook is a $Par(\alpha, 1)$ distribution.
+	\item \textit{PDF}: $P(X = k) = \frac{\alpha \beta^{\alpha}}{k^{\alpha +
+					      1}}$ for $k \geq \beta$, where $\alpha$ is the shape parameter and
+	      $\beta$ is the location parameter
 	\item \textit{Mean}: $\begin{cases}
-			      \frac{\alpha}{\alpha - 1} & \text{ if } \alpha > 1        \\
-			      \infty                    & \text{ if } 0 < \alpha \leq 1
+			      \frac{\alpha\beta}{\alpha - 1} & \text{ if } \alpha > 1        \\
+			      \infty                         & \text{ if } 0 < \alpha \leq 1
 		      \end{cases}$, where $\alpha$ is the shape paramter
 	\item \textit{Variance}: $\begin{cases}
-			      \frac{\alpha}{(\alpha-1)^2(\alpha-2)} & \text{ if } \alpha > 2        \\
-			      \infty                                & \text{ if } 0 < \alpha \leq 1
+			      \frac{\alpha \beta^2}{(\alpha-1)^2(\alpha-2)} & \text{ if } \alpha > 2        \\
+			      \infty                                        & \text{ if } 0 < \alpha \leq 1
 		      \end{cases}$
-	\item \textit{Associated R functions}: \verb|dpareto ppareto, qpareto, rpareto|
+	\item \textit{Associated R functions}: \verb|dpareto ppareto, qpareto, rpareto| (not in standard library, install and import \verb|EnvStats|)
 \end{itemize}
 
 \section*{Histograms and Probability Plots}
@@ -300,9 +307,9 @@ There are different techniques to visualize data and understand which distributi
 	\item For large sample sizes, typically \textbf{histograms} are used to
 	      determine which distribution fits the data
 	      \begin{itemize}
-              \item A \textbf{histogram} is a commonly used graph to show
-                  \emph{frequency distributions} (i.e. how often each value in
-                  a dataset shows up in that dataset)
+		      \item A \textbf{histogram} is a commonly used graph to show
+		            \emph{frequency distributions} (i.e. how often each value in
+		            a dataset shows up in that dataset)
 		      \item Example histogram:
 		            \begin{figure}[H]
 			            \begin{center}
@@ -425,7 +432,7 @@ There are different techniques to visualize data and understand which distributi
 			            \item \emph{(Somewhat useful for this example)} Given a $z$-value,
 			                  if you want to find the area to the left of that
 			                  $z$ value (essentially area to the left of $z$ standard
-			                  deviations from the mean), you can: use a
+			                  deviations from the mean), you can use a
 			                  \textbf{Z lookup table} (which would have to be
 			                  provided to us, see
 			                  \href{https://www.ztable.net/}{this link}) for
@@ -472,4 +479,18 @@ Plugging in each Expected Cumulative Probability into \verb|qnorm|:
 	      and I doubt we will be tested on them because normal probability plots
 	      are hard enough.
 \end{itemize}
+
+\section*{Simulating Realizations of Random Variables with the Uniform
+  Distribution}
+
+Consider the following theorem:
+
+\begin{theorem}
+	[Inverse Transform Method] Suppose $X$ is a countinuous random
+	variable with CDF $F$, where $F$ is invertible with inverse function
+	$F^{-1}$. Let $U \tilde Unif(0, 1)$. Then the distribution of $F^{-1}(U)$
+	is equal to the distribution of $X$.
+\end{theorem}
+
+
 \end{document}
