@@ -57,8 +57,8 @@ For each distribution, there are two main functions that can be used to describe
 		            variable is exactly equal to some value.''
 		      \item \textit{Continuous variable}: the first function is called a
 		            \textbf{probability density function} (PDF for short, not to be
-		            confused with the filetype). This function is like a PMF, but it will
-		            be continuous because it is based on a continuous variable.
+		            confused with the filetype). This will be discussed more in
+		            next week's recap.
 	      \end{itemize}
 
 	\item The second function used to describe a distribution has the same name
@@ -73,10 +73,7 @@ For each distribution, there are two main functions that can be used to describe
 		            \[
 			            F_X(x) = P(X \leq x) = \displaystyle\sum_{y\leq x}P(X = y)
 		            \]
-		      \item For a continuous random variable $X$, the CDF $F_X(x)$ is calculated as such:
-		            \[
-			            F_X(x) = P(X \leq x) = \int_{-\infty}^{x}f_X(y)dy
-		            \]
+		      \item Continuous random variables will be discussed in next week's recap.
 	      \end{itemize}
 \end{itemize}
 
@@ -94,11 +91,7 @@ For each distribution, there are two main functions that can be used to describe
 		            \[
 			            E[X] = \mu = \displaystyle\sum_{i} a_i P(X=a_i) = \displaystyle\sum_{i} a_i p(a_i)
 		            \]
-		      \item For a \textit{continuous} random variable $X$, given that
-		            the PDF of $X$ is $f(x)$ for some value $x$:
-		            \[
-			            E[X] = \mu = \int_{-\infty}^{\infty}x f(x) dx
-		            \]
+		      \item Continuous random variables will be discussed in the next recap.
 	      \end{itemize}
 \end{itemize}
 
@@ -160,10 +153,7 @@ For each distribution, there are two main functions that can be used to describe
 		            $p_X$, the moment-generating function is defined as: \[
 			            M_X(t) = E(e^{tX}) = \displaystyle\sum_{k} e^{tk}p_X(k)
 		            \]
-		      \item For a \textit{continuous random variable} $X$ with PDF
-		            $f_X$, the moment-generating function is defined as: \[
-			            M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} e^{tx} f_X(x) dx
-		            \]
+		      \item Continuous random variables will be discussed in the next recap.
 	      \end{itemize}
 	\item We can get the $n$'th moment from a moment-generating formula $M_X(t)$ by taking $n$ derivatives of the MGF and then evaluating at $0$. That is to say:
 	      \[

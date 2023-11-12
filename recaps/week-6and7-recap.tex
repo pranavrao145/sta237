@@ -29,19 +29,19 @@
 \begin{document}
 \maketitle
 
-\section*{Preface}
+\section{Preface}
 
 This document will cover week 6 and 7 of the STA237H1 curriculum. Some of it
 will be copypasta from my Week 3 to 5 recap, but this document will omit
 information about discrete distributions and focus more on continuous
 distributions.
 
-\section*{What is a continuous random variable?}
+\section{What is a continuous random variable?}
 
 A continuous random variable can be defined as ``a random variable that can
 take on an infinite number of possible values''.
 
-\section*{PDFs and CDFs}
+\section{PDFs and CDFs}
 
 For any continuous statistical distribution, there are two main functions that can be used
 to describe it.
@@ -49,14 +49,26 @@ to describe it.
 \begin{itemize}
 	\item The first function we can use to describe a continuous distribution
 	      is called a \textbf{probability density function} (PDF for short, not
-	      to be confused with the filetype). This function is like a PMF, but it
-	      will be continuous because it is based on a continuous variable. The PDF,
-	      $f_X$, for a continuous variable $X$ satisfies the following conditions:
+	      to be confused with the filetype). This function is often denoted $f_X(k)$.
 	      \begin{itemize}
-		      \item $f_X(x) > 0$
-		      \item $f_X$ is piecewise continuous
-		      \item $\int_{-\infty}^{\infty} f_X(x) dx = 1$
+		      \item While a PMF tells you the probability of a random variable $X$ being a certain value $k$, the PDF $f_X(k)$ represents the \emph{height of the graph of $X$'s values at $k$}, meaning you have to take the area \emph{under} the graph to get anything useful.
+		            \begin{itemize}
+			            \item Note: the area under a graph at a
+			                  \emph{specific value} is $0$, which means it
+			                  always holds that $f_X(k) = 0$  for a
+			                  continuous $X$ and a specific $k$.
+			            \item This is why, more often than not, with continuous distributions, we deal with \emph{integrations} of the PDF over ranges (e.g. the CDF) rather than the PDF iteslf.
+			            \item As a consequence of $f_X(k) = 0$, $P(X < k) = P(X \leq k)$
+		            \end{itemize}
+		      \item The PDF,
+		            $f_X$, for a continuous variable $X$ satisfies the following conditions:
+		            \begin{itemize}
+			            \item $f_X(x) > 0$
+			            \item $f_X$ is piecewise continuous
+			            \item $\int_{-\infty}^{\infty} f_X(x) dx = 1$
+		            \end{itemize}
 	      \end{itemize}
+
 	\item The second function used to describe a continuous distribution is called a
 	      \textbf{cumulative distribution function} (CDF). The CDF is a
 	      function such that, when evaluated at some $x$, it gives the
@@ -69,14 +81,14 @@ to describe it.
 	      \]
 \end{itemize}
 
-\section*{Expected Values, Variances, and Standard Deviation of Continuous Random
+\section{Expected Values, Variances, and Standard Deviation of Continuous Random
   Variables}
 
 This section will cover how to get the expected value, variance, and standard
 deviation of continuous random variable in the general case. See Week 3
 to 5 Recap for a more detailed definition of these terms.
 
-\subsection*{Expected Values of Continuous Random Variables}
+\subsection{Expected Values of Continuous Random Variables}
 
 The expected value of a continuous random variable $X$, given
 that its PDF is $f_X(x)$ for some value $x$, can be calculated as such
@@ -84,7 +96,7 @@ that its PDF is $f_X(x)$ for some value $x$, can be calculated as such
 	E[X] = \mu = \int_{-\infty}^{\infty} x \cdot f_X(x) dx
 \]
 
-\section*{Variance and Standard Distribution}
+\section{Variance and Standard Distribution}
 
 Variance is calculated in the same way for both types of random variables.
 As a recap:
@@ -102,20 +114,20 @@ the variance:
 
 Refer to the Week 3 to 5 Recap for more information.
 
-\section*{Moment Generating Functions}
+\section{Moment Generating Functions}
 
 Refer to the Week 3 to 5 Recap for context on what a moment-generating
-function is. Recall that, for a continuous random variable $X$ with PDF $f_X$,
-the moment generating function is defined as:
+function is. For a continuous random variable $X$ with PDF $f_X$, the moment
+generating function is defined as:
 
 
 \[
 	M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} e^{tx} f_X(x) dx
 \]
 
-\section*{Quantiles and Percentiles}
+\section{Quantiles and Percentiles}
 
-\subsection*{Quantiles}
+\subsection{Quantiles}
 \begin{itemize}
 	\item A \textbf{quantile} is a cut-point dividing the range of a
 	      probability distribution or dividing observations in a sample into
@@ -134,7 +146,7 @@ the moment generating function is defined as:
 	      input scores, not in percentages.
 \end{itemize}
 
-\subsection*{Percentiles}
+\subsection{Percentiles}
 
 \begin{itemize}
 	\item In essence, a \textbf{percentiles} are $100$-quantiles.
@@ -159,7 +171,7 @@ the moment generating function is defined as:
 	      Distribution Functions'' in the week 3 to 5 recap).
 \end{itemize}
 
-\subsection*{The Quantile Function}
+\subsection{The Quantile Function}
 
 \begin{itemize}
 	\item The \textbf{quantile function} of a probability distribution (also
@@ -173,17 +185,21 @@ the moment generating function is defined as:
 	\item See the ``R Distribution Functions'' from the Week 3 to 5 recap.
 \end{itemize}
 
-\section*{Common Continuous Distributions}
+\section{Common Continuous Distributions}
 
-\subsection*{Continuous Uniform Distribution}
+Note: the examples in this section are examples with the PDF; however, in
+practice, for continuous distributions, we generally work with ranges and
+practically using the CDF is much more common.
+
+\subsection{Continuous Uniform Distribution}
 
 \begin{itemize}
 	\item \textit{Use case}: where there is an arbitrary outcome that lies within certain bounds.
 	\item \textit{Examples}: you're waiting for a bus that comes once hourly,
 	      but you don't know when it came last (where $a = 0$, $b = 1$ measured
-	      in hours, $k$ doesn't matter, due to the nature of time (I think))
+	      in hours)
 	\item \textit{Notation}: $Unif(a, b)$, where $a$ is the first lower bound and $b$ is the upper bound
-	\item \textit{PDF}: $P(X = k) = \begin{cases}
+	\item \textit{PDF}: $f_X(k) = \begin{cases}
 			      \frac{1}{b-a} & \text{if } k \in [a, b] \\
 			      0             & \text{otherwise}
 		      \end{cases}$, where $a$ is the first lower bound and $b$ is the upper bound
@@ -192,7 +208,7 @@ the moment generating function is defined as:
 	\item \textit{Associated R functions}: \verb|dunif, punif, qunif, runif|
 \end{itemize}
 
-\subsection*{Exponential Distribution}
+\subsection{Exponential Distribution}
 Note: this distribution is sometimes also called the negative exponential
 distribution.
 
@@ -201,48 +217,48 @@ distribution.
 	      continuously and independently at a constant average rate $\lambda$,
 	      and you care about the wait time until a first event.
 	\item \textit{Examples}: (not sure, hard to find examples for PDF) Suppose
-	      you wanted to know the probability of taking $3$ seconds to burn out,
-	      given it generally fails after $5$ seconds (where $\lambda = 5, k =
-		      3$).
+	      you wanted to know the probability of taking between $3$ and $4$
+	      seconds to burn out, given it generally fails after $5$ seconds
+	      (where $\lambda = 5$).
 	\item \textit{Notation}: $Exp(\lambda)$, where $\lambda$ is the mean or the rate
-	\item \textit{PDF}: $P(X = k) = \lambda e^{\lambda k}$, where $\lambda$ is the mean or the rate
+	\item \textit{PDF}: $f_X(k) = \lambda e^{\lambda k}$, where $\lambda$ is the mean or the rate
 	\item \textit{Mean}: $\frac{1}{\lambda}$, where $\lambda$ is the the mean or the rate
 	\item \textit{Variance}: $\frac{1}{\lambda^2}$, where $\lambda$ is the mean or the rate
 	\item \textit{Associated R functions}: \verb|dexp, pexp, qexp, rexp|
 \end{itemize}
 
 
-\subsection*{Normal Distribution}
+\subsection{Normal Distribution}
 
 \begin{itemize}
 	\item \textit{Use case}: as input increases, if the output is low, high,
 	      and then low again (most people around the mean)
 	\item \textit{Examples}: Suppose you given are the average height of the population is $5$ feet and
 	      the average standard deviation of heights is $0.5$, and you
-	      want to find the probability that someone has a height of $5.1$ feet
-	      (where $k = 5.1, \mu = 5, \sigma = 0.5$)
+	      want to find the probability that someone has a height between $5.0$
+	      and $5.1$ feet (where $\mu = 5, \sigma = 0.5$)
 	\item \textit{Notation}: $N(\mu, \sigma^2)$, where $\mu$ is the mean and
 	      $\sigma^2$ is the variance
-	\item \textit{PDF}: $P(X = k) = \frac{1}{\sigma \sqrt{2\pi}}  e^{\frac{-1}{2}(\frac{k-\mu}{\sigma})^2}$
+	\item \textit{PDF}: $f_X(k) = \frac{1}{\sigma \sqrt{2\pi}}  e^{\frac{-1}{2}(\frac{k-\mu}{\sigma})^2}$
 	\item \textit{Mean}: $\mu$
 	\item \textit{Variance}: $\sigma^2$
 	\item \textit{Associated R functions}: \verb|dnorm, pnorm, qnorm, rnorm|
 \end{itemize}
 
-\subsection*{Gamma Distribution}
+\subsection{Gamma Distribution}
 
 \begin{itemize}
 	\item \textit{Use case}: where you have a situation where events occur
 	      continuously and independently at a constant average rate $\lambda$,
 	      and you care about the wait time until the $k$'th event.
 	\item \textit{Examples}: want to find the probability a machine takes
-	      exactly $3$ units of time to produce a specified number of items given
+	      between $3$ and $4$ units of time to produce a specified number of items given
 	      we are dealing with $5$ units of time overall and it produces $2$ items
 	      per unit of time.
 	\item \textit{Notation}: $Gam(\alpha, \lambda)$, where $\alpha$ is shape
 	      parameter (number of events you are modelling) and $\lambda$ is the
 	      rate parameter (the rate at which constantly-spaced events occur)
-	\item \textit{PDF}: $P(X = k) = \frac{\lambda(\lambda k)^{\alpha - 1}
+	\item \textit{PDF}: $f_X(k) = \frac{\lambda(\lambda k)^{\alpha - 1}
 			      e^{-\lambda k}}{\Gamma(\alpha)}$, where $\Gamma(\alpha) =
 		      (\alpha - 1)!$ for any $\alpha \in \mathbb{N}, \alpha > 0$.
 	\item \textit{Mean}: $\frac{\alpha}{\lambda}$, where $\alpha$ is shape
@@ -254,14 +270,14 @@ distribution.
 	\item \textit{Associated R functions}: \verb|dgamma, pgamma, qgamma, rgamma|
 \end{itemize}
 
-\subsection*{Cauchy Distribution}
+\subsection{Cauchy Distribution}
 
 It is worth noting this distribution is in the textbook. However, it does not
 at all follow the rules of a regular distribution because it has no moments.
 Furthermore, examples are not easy to find and it is useless for the purposes
 of problems in this course, so I have chosen to omit it as of now.
 
-\subsection*{Pareto Distribution}
+\subsection{Pareto Distribution}
 
 Also known as the ``80-20 rule''. Note: this version is from the textbook,
 but the department wants us to use a 2-parameter Pareto distribution so I
@@ -274,9 +290,9 @@ will update this at one point.
 	      useful for modelling catastrophic events where a claim might have a
 	      very large value.
 	\item \textit{Examples}: want to find the probability that a person has
-	      a \$2000 income, given that people's incomes follow a Pareto distribution
-	      with a rate parameter $\alpha = 3$ and a location parameter $\beta = 1$
-	      (where $k = 2000$). \emph{(Note: you pretty much need to be given
+	      between a \$1000 and \$2000 income, given that people's incomes follow
+	      a Pareto distribution with a rate parameter $\alpha = 3$ and a location
+	      parameter $\beta = 1$. \emph{(Note: you pretty much need to be given
 		      that a situtation follows a Pareto distribution with a given shape
 		      parameter to actually use the distribution, it's not very intuitive.)}
 	\item \textit{Notation}: $Par(\alpha, \beta)$, where $\alpha$ is shape/rate
@@ -284,7 +300,7 @@ will update this at one point.
 	      $\alpha$ implies low drop off implies that more extreme outcomes are
 	      more likely). $\beta$ is the location parameter. Note the Pareto distribution
 	      in the textbook is a $Par(\alpha, 1)$ distribution.
-	\item \textit{PDF}: $P(X = k) = \frac{\alpha \beta^{\alpha}}{k^{\alpha +
+	\item \textit{PDF}: $f_X(k) = \frac{\alpha \beta^{\alpha}}{k^{\alpha +
 					      1}}$ for $k \geq \beta$, where $\alpha$ is the shape parameter and
 	      $\beta$ is the location parameter
 	\item \textit{Mean}: $\begin{cases}
@@ -298,11 +314,37 @@ will update this at one point.
 	\item \textit{Associated R functions}: \verb|dpareto ppareto, qpareto, rpareto| (not in standard library, install and import \verb|EnvStats|)
 \end{itemize}
 
-\section*{Histograms and Probability Plots}
+\subsection{Beta Distribution}
+
+\begin{itemize}
+	\item \textit{Use case}: when you want the probability that something is
+	      x\% successful
+	\item \textit{Example}: What is the probability a website's conversion,
+	      which follows a beta distribution with parameters $\alpha = 5, \beta =
+		      10$ is betweenn 60\% and 70\%? \emph{(Note:
+		      similarly to the Pareto distribution, you pretty much have to be
+		      told the variable follows a Beta distribution)}.
+	\item \textit{Notation}: $B(\alpha, \beta)$, where $\alpha$ and $\beta$ are
+	      is shape parameters.
+	\item \textit{PDF}: $f_X(k) = \begin{cases}
+			      \frac{1}{B(\alpha, \beta)} x^{\alpha - 1}(1-y)^{\beta - 1} & 0 \leq y \leq 1  \\
+			      0                                                          & \text{otherwise}
+		      \end{cases}$ where $B(\alpha, \beta) = \int_{0}^{1} x^{\alpha -
+				      1}(1 - x)^{\beta - 1}dy =
+		      \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$,
+	      where $\alpha, \beta$ are shape parameters and $\Gamma$ is the
+	      gamma function.
+	\item \textit{Mean}: $\frac{\alpha}{\alpha + \beta}$, where $\alpha, \beta$ are the shape parameters
+	\item \textit{Variance}: $\frac{\alpha\beta}{(\alpha + \beta + 1)(\alpha + \beta)^2}$
+	\item \textit{Associated R functions}: \verb|dbeta pbeta, qbeta, rbeta|
+\end{itemize}
+
+
+\section{Histograms and Probability Plots}
 
 There are different techniques to visualize data and understand which distribution might best fit the data. This section covers two of them.
 
-\subsection*{Histograms}
+\subsection{Histograms}
 \begin{itemize}
 	\item For large sample sizes, typically \textbf{histograms} are used to
 	      determine which distribution fits the data
@@ -320,7 +362,7 @@ There are different techniques to visualize data and understand which distributi
 	      \end{itemize}
 \end{itemize}
 
-\subsection*{Probability Plots}
+\subsection{Probability Plots}
 \begin{itemize}
 	\item For smaller sample sizes, histograms are not as effective, so
 	      a graphical method we can use instead is probability plots.
@@ -469,18 +511,19 @@ Plugging in each Expected Cumulative Probability into \verb|qnorm|:
 	\end{tabular}
 \end{center}
 \begin{itemize}
-	\begin{enumerate}
-		\item[6.] Plot the points $(x, y)$, where $x$ is the Observed Length of Fish and $y$ is the associated $z$-score.
-			This plot is a \textbf{normal probability plot}. If the points fall roughly in a straight line, you can
-			assume you have a normal distribution, and your initial hypothesis is correct.
-	\end{enumerate}
+	\item Continuing on:
+	      \begin{enumerate}
+		      \item[6.] Plot the points $(x, y)$, where $x$ is the Observed Length of Fish and $y$ is the associated $z$-score.
+			      This plot is a \textbf{normal probability plot}. If the points fall roughly in a straight line, you can
+			      assume you have a normal distribution, and your initial hypothesis is correct.
+	      \end{enumerate}
 	\item For my sanity and yours, I will not include examples for more complicated
 	      distributions (like exponential, etc.). They are extremely hard to find
 	      and I doubt we will be tested on them because normal probability plots
 	      are hard enough.
 \end{itemize}
 
-\section*{Simulating Realizations of Random Variables with the Uniform
+\section{Simulating Realizations of Random Variables with the Uniform
   Distribution}
 
 Consider the following theorem:
@@ -488,9 +531,8 @@ Consider the following theorem:
 \begin{theorem}
 	[Inverse Transform Method] Suppose $X$ is a countinuous random
 	variable with CDF $F$, where $F$ is invertible with inverse function
-	$F^{-1}$. Let $U \tilde Unif(0, 1)$. Then the distribution of $F^{-1}(U)$
+	$F^{-1}$. Let $U \sim Unif(0, 1)$. Then the distribution of $F^{-1}(U)$
 	is equal to the distribution of $X$.
 \end{theorem}
-
 
 \end{document}

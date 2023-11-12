@@ -1,0 +1,333 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{float,graphicx}
+\usepackage{framed}
+\usepackage[margin=3cm, headheight=15pt]{geometry}
+
+
+\pagestyle{fancyplain}
+\fancypagestyle{plain}{
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+
+\lhead{\fancyplain{Pranav Rao}{Pranav Rao}}
+\rhead{\fancyplain{Week 8 and 9 Recap}{Week 8 and 9 Recap}}
+
+\title{Week 8 and 9 Recap}
+\author{Pranav Rao}
+\date{November 11, 2023}
+
+\begin{document}
+\maketitle
+
+\section{Joint Distributions}
+\begin{itemize}
+	\item Given two random variables defined on the same
+	      probability space, the \textbf{joint probability distribution} is the
+	      corresponding probability distribution on all possible pairs of
+	      outputs.
+	\item A joint probability distribution ``encodes'' two other types of probability distributions:
+	      \begin{itemize}
+		      \item \textbf{Marginal distributions:} the distributions of each individual random variable.
+		      \item \textbf{Conditional distributions:} deal with how the
+		            outputs of one random variable are distributed when
+		            given information about the other random variable.
+	      \end{itemize}
+	\item We use the \textbf{covariance} to measure the relationship between two random variables (definition depends on types of random variables, see below).
+	      \begin{itemize}
+		      \item However, the covariance is in the same units as the
+		            variances, and therefore is affected by the units that we
+		            choose to measure the data.
+		      \item So, we also define the \textbf{correlation}, which is unitless (definition depends on types of random variables, see below)
+		            \begin{itemize}
+			            \item The correlation has values on $[-1, 1]$:
+			                  \begin{itemize}
+				                  \item A correlation of $0$ indicates there is
+				                        no linear relationship between the two
+				                        random variables (i.e. they are
+				                        \emph{linearly independent}).
+				                  \item A correlation of $\pm 1$ indicates a
+				                        perfect linear positive or negative
+				                        relationship.
+				                  \item Correlation values near $\pm 1$
+				                        imply a ``strong'' correlation, values near $0$ imply a
+				                        ``weak'' correlation, and values in between imply
+				                        ``moderate'' correlation.
+			                  \end{itemize}
+		            \end{itemize}
+	      \end{itemize}
+	\item Like regular random variables/distributions, there are two types of
+	      joint distributions, which we will look into in separate sections of
+	      this recap:
+	      \begin{itemize}
+		      \item Discrete
+		      \item Continuous
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Joint Distributions of Discrete Random Variables}
+
+\begin{itemize}
+	\item Consider two discrete random variables $X$ and $Y$.
+	\item The \textbf{joint probability mass function}, defined as $P_{XY}(X=x,
+		      Y=y)$ is normally given in a table, and must satisfy two properties for
+	      every $x$, $y$:
+	      \begin{itemize}
+		      \item $0 \leq P_{XY}(x, y) \leq 1$
+		      \item $\displaystyle\sum_{x} \displaystyle\sum_{y} P_{XY}(x, y) = 1$
+	      \end{itemize}
+	\item The \textbf{marginal probability mass functions} $P_X(X=x), P_Y(Y=y)$ can be defined as such:
+	      \begin{itemize}
+		      \item $P_X(X=x) = \displaystyle\sum_{y} P_{XY}(x, y)$
+		      \item $P_Y(Y=y) = \displaystyle\sum_{x} P_{XY}(x, y)$
+	      \end{itemize}
+
+	\item The \textbf{joint cumulative distribution function} $F_{XY}(x, y)$ of
+	      two discrete random variables $X, Y$ with PMF $P_{XY}(x, y)$ can be defined as such:
+	      \[
+		      F_{XY}(x, y) = P_{XY}(X \leq x, Y \leq y)
+	      \]
+	\item The \textbf{marginal cumulative distribution functions} $F_X(x)$ and $F_Y(y)$ can be defined as such:
+	      \begin{itemize}
+		      \item $F_X(x) = \lim_{y\to\infty}F_{XY}(x, y) = F_{XY} (x, \infty)$ (shorthand) for any $x$
+		      \item $F_Y(y) = \lim_{x\to\infty}F_{XY}(x, y) = F_{XY} (\infty, y)$ (shorthand) for any $y$
+	      \end{itemize}
+	\item \textbf{Conditional probability mass functions} require more detail and are discussed in a later section.
+	\item The \textbf{expected value} can be calculated as $E[g(X, Y)] = \displaystyle\sum_{x}
+		      \displaystyle\sum_{y} g(x, y) \cdot F_{XY}(x, y)$, where $g(X, Y)$ is a
+	      function of $X, Y$ and $F_{XY}(x, y)$ is a joint PMF of $X$ and $Y$. Some consequences of this are:
+	      \begin{itemize}
+		      \item When $g(X, Y) = X$, $E(g(X, Y)) = E(X) = \displaystyle\sum_{x} = x P_X(x)$, where $P_X(x)$ is the marginal pmf of $X$
+		      \item When $g(X, Y) = Y$, $E(g(X, Y)) = E(Y) = \displaystyle\sum_{y} = y P_Y(y)$, where $P_Y(y)$ is the marginal pmf of $Y$
+	      \end{itemize}
+	\item The \textbf{variance} is still defined as $Var(g(X, Y)) = E[g(X,
+				      Y)^2] - (E[g(X, Y)])^2$, where $g(X, Y)$ is a function of $X, Y$. Some
+	      consequences of this are:
+	      \begin{itemize}
+		      \item $Var(X) = \displaystyle\sum_{x} x^2 P_(X) - (E(X))^2$, where $P_X(x)$ is the marginal pmf of $X$
+		      \item $Var(Y) = \displaystyle\sum_{y} y^2 P_(Y) - (E(Y))^2$, where $P_Y(y)$ is the marginal pmf of $Y$
+	      \end{itemize}
+	\item As usual, the \textbf{standard deviation} $\sigma_X, \sigma_Y$,
+	      can be calculated by taking the square roots of the respective
+	      variances.
+	\item The \textbf{covariance} $Cov(X, Y)$ of $X$ and $Y$ in a joint discrete distribution can be calculated as such:
+	      \[
+		      Cov(X, Y) = \displaystyle\sum_{x} \displaystyle\sum_{y} xy P_{XY}(x, y) - E(X)E(Y)
+	      \]
+	\item The \textbf{correlation} $\rho_{XY}$ of $X$ and $Y$ in a joint discrete distribution can be calculated as such:
+	      \[
+		      \rho_{XY} = \frac{Cov(X, Y)}{\sigma_X \sigma_Y}
+	      \]
+	\item Discrete random variables are \textbf{independent} if their joint PMF factors into a product of the marginal PMFs.
+\end{itemize}
+
+\subsection{Joint Distributions of Continuous Random Variables}
+
+\begin{itemize}
+	\item Consider two continuous random variables $X$ and $Y$.
+	\item The \textbf{joint probability distribution function}, defined as a piecewise
+	      continuous function $f_{XY}(x, y)$ or sometimes just $f(x, y)$, must satisfy two properties for
+	      every $x$, $y$ in the domain of $f_{XY}$:
+	      \begin{itemize}
+		      \item $f_{XY}(x, y) \geq 0$
+		      \item $\int_{y} \int_{x} f_{XY}(x, y) dx dy = 1$ (note that $\int_{x}$
+		            means to integrate over all $x$ from $(-\infty, \infty)$),
+		            same for every other reference in this document
+	      \end{itemize}
+	\item The \textbf{marginal probability distribution functions} $f_X(x), f_Y(y)$ can be defined as such:
+	      \begin{itemize}
+		      \item $f_X(x) = \int_{y} f_{XY}(x, y)dy$
+		      \item $f_Y(y) = \int_{x} f_{XY}(x, y)dx$
+	      \end{itemize}
+	\item The \textbf{joint cumulative distribution function} $F_{XY}(a, b)$ of
+	      two continuous random variables $X, Y$ with PDF $f_{XY}(x, y)$ can be defined as such:
+	      \[
+		      F_{XY}(a, b) = f_{XY}(X \leq a, Y \leq b) = \int_{-\infty}^{b} \int_{-\infty}^{a} f_{XY}(x, y) dx dy
+	      \]
+	      \begin{itemize}
+		      \item It must satisfy some properties:
+		            \begin{itemize}
+			            \item $F_{XY}(\infty, \infty) = 1$
+			            \item $F_{XY}(-\infty, y) = F_{XY}(x, -\infty) = 0$
+		            \end{itemize}
+	      \end{itemize}
+	\item The \textbf{marginal cumulative distribution functions} $F_X(x)$ and $F_Y(y)$ can be defined as such:
+	      \begin{itemize}
+		      \item $F_X(x) = \lim_{y\to\infty}F_{XY}(x, y) = F_{XY} (x, \infty)$ (shorthand) for any $x$
+		      \item $F_Y(y) = \lim_{x\to\infty}F_{XY}(x, y) = F_{XY} (\infty, y)$ (shorthand) for any $y$
+	      \end{itemize}
+	\item \textbf{Conditional probability distribution functions} require more detail and are discussed in a later section.
+	\item The \textbf{expected value} can be calculated as $E[g(X, Y)] = \int_{y} \int_{x} g(x, y) f_{XY}(x, y) dx dy$, where $g(X, Y)$ is a
+	      function of $X, Y$ and $f_{XY}(x, y)$ is a joint PDF of $X$ and $Y$. Some consequences of this are:
+	      \begin{itemize}
+		      \item When $g(X, Y) = X$, $E(g(X, Y)) = E(X) = \int_{x} x\cdot f_X(x)dx$, where $f_X(x)$ is the marginal pdf of $X$
+		      \item When $g(X, Y) = Y$, $E(g(X, Y)) = E(Y) = \int_{y} y\cdot f_Y(y)dy$, where $f_Y(y)$ is the marginal pdf of $Y$
+	      \end{itemize}
+	\item The \textbf{variance} is still defined as $Var(g(X, Y)) = E[g(X,
+				      Y)^2] - (E[g(X, Y)])^2$, where $g(X, Y)$ is a function of $X, Y$. Some
+	      consequences of this are:
+	      \begin{itemize}
+		      \item $Var(X) = \int_{x} x^2 f_X(x)dx - (E(X))^2$, where $f_X(x)$ is the marginal pdf of $X$
+		      \item $Var(Y) = \int_{y} y^2 f_Y(y)dy - (E(Y))^2$, where $f_Y(y)$ is the marginal pdf of $Y$
+	      \end{itemize}
+	\item As usual, the \textbf{standard deviation} $\sigma_X, \sigma_Y$,
+	      can be calculated by taking the square roots of the respective
+	      variances.
+	\item The \textbf{covariance} $Cov(X, Y)$ of $X$ and $Y$ in a joint continuous distribution can be calculated as such:
+	      \[
+		      Cov(X, Y) = \int_{x} \int_{y} xy f_{XY} (x, y) dy dx - E(X)E(Y)
+	      \]
+	\item The \textbf{correlation} $\rho_{XY}$ of $X$ and $Y$ in a joint continuous distribution can be calculated as such:
+	      \[
+		      \rho_{XY} = \frac{Cov(X, Y)}{\sigma_X \sigma_Y}
+	      \]
+	\item Continuous random variables are \textbf{independent} if their joint PDF
+	      factors into a product of the marginal PDFs.
+\end{itemize}
+
+\section{Conditional Probabilities of Joint Distributions}
+
+\subsection{Discrete Distributions}
+Note: for this section, whenever it says ``given $Y=y$'' (for any given random variable), you can also replace that with ``given an event $A$ has occurred.''
+
+\begin{itemize}
+	\item The \textbf{conditional probability mass functions} $P_{X | Y}(x|y)$ and $P_{Y | X}(y|x)$ of a discrete distribution can be defined as such (where $P(x, y)$ is a joint PMF for $X$ and $Y$):
+	      \begin{itemize}
+		      \item ``Conditional probability mass function of $X$ given that
+		            $Y=y$'': $P_{X | Y}(x|y) = \frac{P(\{X=x\}\cap
+				            \{Y=y\})}{P(Y=y)}=\frac{P(x,y)}{P_Y(y)}$, provided $P_Y(y) >
+			            0$ (or else it doesn't exist).
+		      \item ``Conditional probability mass function of $Y$ given that
+		            $X=x$'': $P_{Y | X}(y|x) = \frac{P(\{Y=y\}\cap
+				            \{X=x\})}{P(X=x)}=\frac{P(x,y)}{P_X(x)}$, provided $P_X(x) >
+			            0$ (or else it doesn't exist).
+	      \end{itemize}
+	\item Below are some properties of conditional PMFs:
+	      \begin{enumerate}
+		      \item Conditional PMFs are valid PMFs, meaning that they satisfy the properties of a PMF (see definition of PMF for Joint Distribution above).
+		      \item \emph{In general}, the conditional PMF of $X$ given $Y$ does not equal the conditional distribution of $Y$ given $X$, i.e.:
+		            \[
+			            P_{X|Y}(x | y) \neq  P_{Y|X}(y | x)
+		            \]
+		      \item If $X$ and $Y$ are independent, then:
+		            \begin{itemize}
+			            \item $P_{X|Y}(x | y) = P_X(x)$
+			            \item $P_{Y|X}(y | x) = P_Y(y)$
+		            \end{itemize}
+	      \end{enumerate}
+	\item The \textbf{conditional cumulative distribution functions} $F_{X|Y=y}
+		      (x)$ and $F_{Y|X=x} (y)$ of a discrete distribution (where
+	      $P_{X|Y}(x|y)$ is a conditional PMF for $X$ and $Y$ and opposite)
+	      can be written as
+	      such:
+	      \begin{itemize}
+		      \item ``Conditional CDF of $X$ given that $Y=y$'': $F_{X|Y=y} (x) = P(X \leq x | Y = y) = \displaystyle\sum_{a \leq x} P_{X|Y}(a | Y = y)$
+		      \item ``Conditional CDF of $Y$ given that $X=x$'': $F_{Y|X=x} (y) = P(Y \leq y | X = x) = \displaystyle\sum_{a \leq y} P_{Y|X}(a | X = x)$
+	      \end{itemize}
+	\item The \textbf{conditional expected values} $E[X|Y = y]$ and $E[Y |X = x]$ can be calculated as such:
+	      \begin{itemize}
+		      \item ``Conditional expected value of $X$, given $Y$'': $\mu_{X|Y=y} = E[X | Y=y] = \displaystyle\sum_{x} x P_{X|Y}(x|y)$
+		      \item ``Conditional expected value of $Y$, given $X$'': $\mu_{Y|X=x} = E[Y | X=x] = \displaystyle\sum_{y} y P_{Y|X}(y|x)$
+	      \end{itemize}
+	\item You can also calculate the \textbf{conditional variances}. For example:
+	      \begin{itemize}
+		      \item ``Conditional variance of $X$ given $Y=y$'': $\sigma_{X|Y=y}^2 = Var(X|Y=y) = E[X^2 | Y=y] - (E[X|Y=y])^2$
+		      \item ``Conditional variance of $Y$ given $X=x$'': $\sigma_{Y|X=x}^2 = Var(Y|X=x) = E[Y^2 | X=x] - (E[Y|X=x])^2$
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Continuous Distributions} % TODO: finish
+Note: for this section, whenever it says ``given $Y=y$'' (for any given random variable), you can also replace that with ``given an event $A$ has occurred.''
+
+\begin{itemize}
+	\item The \textbf{conditional probability distribution functions} $f_{X | Y}(x|y)$ and $f_{Y | X}(y|x)$ of a continuous distribution can be defined as such (where $f(x, y)$ is a joint PDF for $X$ and $Y$):
+	      \begin{itemize}
+		      \item ``Conditional probability distribution function of $X$ given that $Y=y$'': $f_{X | Y}(x|y) = \frac{f(x, y)}{f_Y(y)}$.
+		      \item ``Conditional probability distribution function of $Y$ given that $X=x$'': $f_{Y | X}(y|x) = \frac{f(y, x)}{f_X(x)}$.
+	      \end{itemize}
+	\item Below are some properties of conditional PDFs:
+	      \begin{enumerate}
+		      \item Conditional PDFs are valid PDFs, meaning that they satisfy the properties of a PDF (see definition of PDF for Joint Distribution above).
+		      \item \emph{In general}, the conditional PDF of $X$ given $Y$ does not equal the conditional distribution of $Y$ given $X$, i.e.:
+		            \[
+			            f_{X|Y}(x | y) \neq  f_{Y|X}(y | x)
+		            \]
+		      \item If $X$ and $Y$ are independent, then:
+		            \begin{itemize}
+			            \item $f_{X|Y}(x | y) = f_X(x)$
+			            \item $f_{Y|X}(y | x) = f_Y(y)$
+		            \end{itemize}
+	      \end{enumerate}
+	\item The \textbf{conditional cumulative distribution functions} $F_{X|Y=y}
+		      (x)$ and $F_{Y|X=x} (y)$ of a discrete distribution (where
+	      $f_{X|Y}(x|y)$ is a conditional PDF for $X$ and $Y$ and opposite)
+	      can be written as
+	      such:
+	      \begin{itemize}
+		      \item ``Conditional CDF of $X$ given that $Y=y$'': $F_{X|Y=y} (x) = P(X \leq x | Y = y) = \int_{-\infty}^{x} f_{X|Y}(x | y)dx$
+		      \item ``Conditional CDF of $Y$ given that $X=x$'': $F_{Y|X=x} (y) = P(Y \leq y | X = x) = \int_{-\infty}^{y} f_{Y|X}(y | x)dy$
+	      \end{itemize}
+	\item The \textbf{conditional expected values} $E[X|Y = y]$ and $E[Y |X = x]$ can be calculated as such:
+	      \begin{itemize}
+		      \item ``Conditional expected value of $X$, given $Y$'': $\mu_{X|Y=y} = E[X | Y=y] \int_{x} x\cdot f_{X|Y}(x, y)dx$
+		      \item ``Conditional expected value of $Y$, given $X$'': $\mu_{Y|X=x} = E[Y | X=x] \int_{y} y\cdot f_{Y|X}(y, x)dy$
+	      \end{itemize}
+	\item You can also calculate the \textbf{conditional variances}. For example:
+	      \begin{itemize}
+		      \item ``Conditional variance of $X$ given $Y=y$'': $\sigma_{X|Y=y}^2 = Var(X|Y=y) = E[X^2 | Y=y] - (E[X|Y=y])^2$
+		      \item ``Conditional variance of $Y$ given $X=x$'': $\sigma_{Y|X=x}^2 = Var(Y|X=x) = E[Y^2 | X=x] - (E[Y|X=x])^2$
+	      \end{itemize}
+\end{itemize}
+
+
+\section{Finding Joint PMFs, PDFs, and CDFs of Independent Random Variables}
+
+\begin{itemize}
+	\item  A \textbf{property of independent random variables}: if $X$ and $Y$ are independent
+	      random variables, the joint PDF, PDF, CDF, Expected Values, Variance, etc. of a function
+	      of $X, Y$ can be obtained by \emph{applying the same function} to the original functions'
+	      PMFs, PDFs, CDF, etc.
+	\item For example, assume $X$ and $Y$ are independent random variables. Then:
+	      \begin{itemize}
+		      \item If $P_X(x), P_Y(y)$ are PMFs for $X, Y$, respectively, then
+		            the joint PMF for $XY$ is $P_XY(x, y) = P_X(x) \cdot P_Y(y)$.
+		      \item If $f_X(x), f_Y(y)$ are PDFs for $X, Y$, respectively, then
+		            the joint PDF for $XY$ is $f_XY(x, y) = f_X(x) \cdot f_Y(y)$.
+		      \item Same for CDF, expected value, variance, etc.
+	      \end{itemize}
+\end{itemize}
+
+\section{Two Useful Laws of Joint Distributions}
+
+\subsection{Law of Total Expectation (AKA Law of Iterated Expectations)}
+
+Let $X, Y$ be random variables in the same probability space. Then, the following holds:
+\[
+	E(X) = E[E(X | Y)]
+\]
+
+\subsection{Law of Total Variance (AKA Eve's Law)}
+Let $X, Y$ be random variables in the same probability space and assume the
+variance of $Y$ is finite (i.e. it is bound by a finite number). Then, the
+following holds:
+
+\[
+	Var(Y) = E[Var(Y | X)] + Var(E[Y | X])
+\]
+
+\section{Common Multivariate (Joint) Probability Distributions}
+
+\subsection{Multivariate Normal Probability Distribution}
+
+\emph{Before I spend a ridiculous amount of time researching this, I will wait
+	to see what is covered in lecture because the learning objectives say we only
+	need to understand this in the scope of R}.
+
+\end{document}
