@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{float,graphicx}
+\usepackage{framed}
+\usepackage[margin=3cm, headheight=15pt]{geometry}
+
+\pagestyle{fancyplain}
+\fancypagestyle{plain}{
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+\lhead{\fancyplain{Pranav Rao}{Pranav Rao}}
+\rhead{\fancyplain{Week 10 Recap}{Week 10 Recap}}
+
+\title{Week 10 Recap}
+\author{Pranav Rao}
+\date{Sunday, November 26, 2023}
+
+\begin{document}
+\maketitle
+
+\subsection{CDF Method of Finding PDF of a Function of a Random Variable}
+Given that $Y = g(X)$, where $X$ is some random variable.
+\begin{enumerate}
+	\item Determine the possible value of $Y$ based on the values of $X$ and
+	      the function $g$.
+	\item Begin with the cdf $F_Y(y) = P(Y \leq y) = P(g(X) \leq y)$.
+	      Express the cdf in terms of the original random variable $X$.
+	\item From $P(g(X) \leq y) = P(X \leq g^{-1}(y))$.
+	\item Differentiate with respect to $y$ to obtain the density $f_Y(y)$.
+\end{enumerate}
+
+\subsection{Method of Transformations to Find PDF of Function of a Random Variable}
+
+\begin{itemize}
+	\item If $g(X)$ is monotonic (i.e. either strictly increasing or decreasing over the range of $X$) so it is invertible with inverse function $X = g^{-1}(Y)$, then:
+	      \[
+		      f_Y(y) = f_X(g^{-1}(y)) \left|\frac{d}{dy} g^{-1}(y)\right|
+	      \]
+\end{itemize}
+
+\end{document}

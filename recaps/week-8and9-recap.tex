@@ -119,7 +119,7 @@
 	      variances.
 	\item The \textbf{covariance} $Cov(X, Y)$ of $X$ and $Y$ in a joint discrete distribution can be calculated as such:
 	      \[
-		      Cov(X, Y) = \displaystyle\sum_{x} \displaystyle\sum_{y} xy P_{XY}(x, y) - E(X)E(Y)
+		      Cov(X, Y) = E[XY] - E[X]E[Y]
 	      \]
 	\item The \textbf{correlation} $\rho_{XY}$ of $X$ and $Y$ in a joint discrete distribution can be calculated as such:
 	      \[
@@ -182,7 +182,7 @@
 	      variances.
 	\item The \textbf{covariance} $Cov(X, Y)$ of $X$ and $Y$ in a joint continuous distribution can be calculated as such:
 	      \[
-		      Cov(X, Y) = \int_{x} \int_{y} xy f_{XY} (x, y) dy dx - E(X)E(Y)
+		      Cov(X, Y) = E[XY] - E[X]E[Y]
 	      \]
 	\item The \textbf{correlation} $\rho_{XY}$ of $X$ and $Y$ in a joint continuous distribution can be calculated as such:
 	      \[
@@ -310,7 +310,7 @@ Note: for this section, whenever it says ``given $Y=y$'' (for any given random v
 
 Let $X, Y$ be random variables in the same probability space. Then, the following holds:
 \[
-	E(X) = E[E(X | Y)]
+	E(X) = E_Y[E_{X|Y}(X | Y)]
 \]
 
 \subsection{Law of Total Variance (AKA Eve's Law)}
@@ -319,15 +319,62 @@ variance of $Y$ is finite (i.e. it is bound by a finite number). Then, the
 following holds:
 
 \[
-	Var(Y) = E[Var(Y | X)] + Var(E[Y | X])
+	Var(Y) = E_X[Var_{Y|X}(Y | X)] + Var_X(E_{Y | X}[Y | X])
 \]
 
 \section{Common Multivariate (Joint) Probability Distributions}
 
-\subsection{Multivariate Normal Probability Distribution}
+\subsection{Multinomial Probability Distribution}
 
-\emph{Before I spend a ridiculous amount of time researching this, I will wait
-	to see what is covered in lecture because the learning objectives say we only
-	need to understand this in the scope of R}.
+\begin{itemize}
+	\item Useful in a case where there are \textbf{n} independent and
+	      identically distributed trials where each trial can result in one of
+	      $r$ possible outcomes with probabilities $p_1, p_2, p_3, p_r$ (these
+	      probabilities must add to 1).
+	\item The joint pmf for $X_i, i = 1, 2, \ldots r$, the frequencies (counts)
+	      of each of the $r$ outcomes in $n$ trials is:
+	      \[
+		      p_{X_1, X_2, X_3 \ldots X_r} (x_1, x_2, x_3 \ldots x_r) = \frac{n!}{x_1! x_2! \ldots x_r!} p_1^{x_1} + p_2^{x_2} + \ldots + p_r^{x_r}
+	      \]
+
+	      where
+
+	      \[
+		      x_i \in \{0, 1, \ldots n\}(i = 1, 2, \ldots r), x_1 + x_2 + \ldots + x_r = n
+	      \]
+	\item Note: the $r$ possible outcomes do not need to be ordered categories, but
+	      the order of the $x$ values must be consistent with the order of
+	      the probabilities (i.e. the index $i$ represents a specific
+	      category).
+	\item The marginal distributoins for the frequency of each category
+	      are binomial, i.e. $X_i \sim Bin(n, p)$ for $i = 1, \ldots r$.
+	\item Associated \verb|R| functions: \verb|dmultinom, rmultinom|
+\end{itemize}
+
+\subsection{Multivariate Normal Distribution}
+
+\begin{itemize}
+	\item Useful joint distribution of normal variables with joint pdf:
+	      \[
+		      f_{X, Y} (x, y) = \frac{1}{2\pi \sigma_x \sigma_y \sqrt{1 - \rho^2}} exp\left(\frac{-1}{2(1-\rho^2)}\left((\frac{x-\mu_X}{\sigma_X})^2 + (\frac{y - \mu_Y}{\sigma_Y})^2 - \frac{2\rho(x - \mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y}\right)\right)
+	      \]
+	      for
+	      \[
+		      -\infty \leq x \leq +\infty, -\infty \leq y \leq +\infty
+	      \]
+	\item Five parameters: $\mu_X, \mu_Y, \sigma_X, \sigma_Y, \rho$,
+	      where $\rho$ is the covariance between $X$ and $Y$.
+	\item Marginal PDFs of $X$ and $Y$ are:
+	      \begin{itemize}
+		      \item $N(\mu_X, \sigma_X^2)$, $N(\mu_Y, \sigma_Y^2)$
+	      \end{itemize}
+	\item Conditional distributions are univariate normal:
+	      \begin{itemize}
+		      \item $E(X | Y = y) = \mu_X + \rho\sigma_X (\frac{y - \mu_Y}{\sigma_Y})$ and vice versa
+		      \item $Var(X | Y = y) = \sigma_X^2 (1 - \rho^2)$ and vice versa
+	      \end{itemize}
+	\item Associated R functions (part of \verb|mvtnorm|, not standard library): \verb|dmvnorm, pmvnorm, rmvnorm|
+\end{itemize}
+
 
 \end{document}
