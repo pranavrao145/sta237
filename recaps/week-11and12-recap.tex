@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{float,graphicx}
+\usepackage{framed}
+\usepackage[margin=3cm, headheight=15pt]{geometry}
+
+\pagestyle{fancyplain}
+\fancypagestyle{plain}{
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+\lhead{\fancyplain{Pranav Rao}{Pranav Rao}}
+\rhead{\fancyplain{Week 11 and 12 Recap}{Week 11 and 12 Recap}}
+
+\title{Week 11 and 12 Recap}
+\author{Pranav Rao}
+\date{December 8, 2023}
+
+\begin{document}
+\maketitle
+
+\section{Chebyshev's Inequality}
+\begin{itemize}
+	\item  For any random variable $X$ and any $\varepsilon > 0$:
+
+	      \[
+		      P(\left|X - E(X)\right| \geq \varepsilon) \leq \frac{1}{\varepsilon^2} Var(X)
+	      \]
+	\item Also note this other result: denote $Var(X)$ by $\sigma^2$ and consider the probability that $X$ is within a few standard deviations from its expectation $\mu$:
+	      \[
+		      P(\left|X - E(X)\right| < k \sigma) \geq 1 - \frac{1}{k^2}
+	      \]
+	      where $k$ is a small integer.
+	\item You can use this inequality to bound probabilities.
+\end{itemize}
+
+\section{New Random Variable Notation}
+
+\begin{itemize}
+	\item Let $n$ be the number of indepdendent observations from the
+	      chosen from the probability probability distribution of a random
+	      variable $X$.
+	\item Consider $\overline{X} = \frac{\displaystyle\sum_{i=1}^n X_i}{n}$
+	      where $X_i$ are iid with mean $\mu_X$ and variance $\sigma_X^2$. Then:
+\end{itemize}
+
+\[
+	\mu_{\overline{X}} = E[\overline{X}] = E(\frac{X_1 + X_2 + \ldots + X_n}{n})
+\]
+
+\[
+	\sigma_{\overline{X}}^2 = Var(\overline{X}) = Var(\frac{X_1 + X_2 + \ldots + X_n}{n})
+\]
+
+\begin{itemize}
+	\item $\mu_{\overline{X}} = \mu_X$
+	\item $\sigma^2_{\overline{X}} = \frac{\sigma_X^2}{n}$, regardless of $n$.
+	\item  As $n$ gets large, $\overline{X}$ approaches $\mu_X$ (by Law of Large
+	      numbers - see below).
+\end{itemize}
+
+\section{Law of Large Numbers}
+
+\begin{itemize}
+	\item \textbf{Idea:} if you have a hotel with infinitely many rooms which contain
+	      guests that are flipping coins forever, the strong law of large numbers
+	      says that, in virtually every room of the hotel, the sequence of
+	      averages will converge to $\frac{1}{2}$ and stay close to $\frac{1}{2}$
+	      for all remaining terms.
+	\item \textbf{Weak Law of Large Numbers:} Let $X_1, X_2, \ldots$ be an
+	      i.i.d sequence of random variables with finite mean $\mu$ and
+	      variance $\sigma^2$. For $n = 1, 2, \ldots$, let $S_n = X_1 + \ldots
+		      + X_n$. Then:
+	      \[
+		      \lim_{n\to\infty} P(\left|\frac{S_n}{n} - \mu\right| \geq \varepsilon) = 0
+	      \]
+	\item \textbf{Strong Law of Large Numbers:} Let $X_1, X_2, \ldots$ be an
+	      i.i.d sequence of random variables with finite mean $\mu$. For $n = 1,
+		      2, \ldots$, let $S_n = X_1 + \ldots + X_n$. Then:
+	      \[
+		      P(\lim_{n \to \infty} \frac{S_n}{n} = \mu) = 1
+	      \]
+	      We say that $\frac{S_n}{n}$ converges to $\mu$ with probability 1.
+	\item Basically this law means that for some $\overline{X}, X, \mu_X$, as
+	      $n \to\infty$, $\overline{X} \to \mu_X$. \end{itemize}
+
+\section{Central Limit Theorem}
+
+Let $X_1, X_2$ be any sequence of i.i.d. random variables with finite positive
+variance. Let $\mu$ be the expected value and $\sigma^2$ the variance of each
+of the $X_i$. For $n \geq 1$, let $Z_N$ be defined by:
+
+\[
+	Z_n = \sqrt{n} \frac{\overline{X}_n - \mu}{\sigma}
+\]
+
+Then, for any number $a$:
+
+\[
+	\lim_{n\to\infty} F_{Z_n}(a) = \phi(a)
+\]
+
+where $\phi$ is the distribution function of $N(0, 1)$. In other words, the
+distribution function of $Z_n$ converges to the distribution function $\phi$ of
+the standard normal distribution as $n \to \infty$.
+
+\end{document}
