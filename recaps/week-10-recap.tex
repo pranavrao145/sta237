@@ -25,15 +25,16 @@
 \begin{document}
 \maketitle
 
+\section{Methods of Finding PDF of Functions of Random Variables}
+
 \subsection{CDF Method of Finding PDF of a Function of a Random Variable}
-Given that $Y = g(X)$, where $X$ is some random variable.
+
+Let $U$ be a function of the random variables $Y$.
 \begin{enumerate}
-	\item Determine the possible value of $Y$ based on the values of $X$ and
-	      the function $g$.
-	\item Begin with the cdf $F_Y(y) = P(Y \leq y) = P(g(X) \leq y)$.
-	      Express the cdf in terms of the original random variable $X$.
-	\item From $P(g(X) \leq y) = P(X \leq g^{-1}(y))$.
-	\item Differentiate with respect to $y$ to obtain the density $f_Y(y)$.
+	\item Find the region $U \leq u$.
+	\item Find $F_U(u) = P(U \leq u)$ by integrating $f(y)$ over the region of $U \leq u$ .
+	\item Find the density function $f_U(u)$ by differentiating $F_U(u)$. Thus,
+	      $f_U(u) = \frac{dF_U(u)}{du}$
 \end{enumerate}
 
 \subsection{Method of Transformations to Find PDF of Function of a Random Variable}
@@ -45,4 +46,51 @@ Given that $Y = g(X)$, where $X$ is some random variable.
 	      \]
 \end{itemize}
 
+\section{Using MGFs to Determine Distribution of Sum of IID Random Variables}
+\begin{itemize}
+	\item \textbf{IID Random Variables:} independent and independently
+	      distributed (have the same distribution)
+	\item Let $X$ and $Y$ be independent variables with moment generating
+	      functions $M_X(t)$, $M_Y(t)$, respectively. Then the MGF of $X + Y$
+	      can be found as follows:
+	      \begin{align*}
+		      M_{X + Y}(t) = E[e^{tX+tY}] = E[e^{tX}]E[e^{tY}] = M_X(t)M_Y(t)
+	      \end{align*}
+	\item If you calculate the above function and compare it with the
+	      MGFs of known functions, you can find the distribution of the sum
+	      $X + Y$.
+\end{itemize}
+
+\section{Bivariate Transformations Using Jacobians}
+
+Suppose that $Y_1$, $Y_2$ are continuous random variables with joint density
+function $f_{Y_1,Y_2}(y_1, y_2)$ and that for all $(y_1, y_2)$ such that
+$f_{Y_1, Y_2}(y_1, y_2) > 0$.
+
+\[
+	u_1 = h_1(y_1, y_2) \text{ and } u_2 = h_2(y_1, y_2)
+\]
+
+is a one-to-one transformation from $(y_1, y_2)$ to $(u_1, u_2)$ with inverse:
+
+\[
+	y_1 = h^{-1}(u_1, u_2) \text{ and } y_2 = h_2^{-1}(u_1, u_2)
+\]
+
+If $h^{-1}(u_1, u_2)$ and $h_2^{-1}(u_1, u_2)$ have continuous partial derivatives with respect to $u_1, u_2$ and the \textbf{Jacobian}:
+
+\[
+	J = det \begin{bmatrix}
+		\frac{\partial h_{1}^{-1}}{\partial u_1} & \frac{\partial h_{1}^{-1}}{\partial u_2} \\
+		\frac{\partial h_{2}^{-1}}{\partial u_1} & \frac{\partial h_{2}^{-1}}{\partial u_2}
+	\end{bmatrix} = \frac{\partial h_1^{-1}}{\partial u_1} \frac{\partial h_2^{-1}}{\partial u_2} - \frac{\partial h_2^{-1}}{\partial u_1} \frac{\partial h_1^{-1}}{\partial u_2} \neq 0
+\]
+
+Then, the joint density function of $U_1$ and $U_2$ is:
+
+\[
+	f_{U_1, U_2}(u_1, u_2) = f_{Y_1, Y_2}(h_1^{-1}(u_1, u_2), h_2^{-1}(u_1, u_2)) \left|J\right|
+\]
+
+where $\left|J\right|$ is the absolute value of the Jacobian.
 \end{document}
